@@ -3,7 +3,6 @@
     "rootNamespace": "LiveKit",
     "references": [],
     "includePlatforms": [
-        "Editor",
         "WebGL"
     ],
     "excludePlatforms": [],
