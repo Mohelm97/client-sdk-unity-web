@@ -61,7 +61,7 @@ namespace LiveKit
         {
             m_TextureId = JSNative.NewTexture();
             SetupTexture();
-            JSNative.AttachVideo(NativeHandle, m_TextureId);
+            JSNative.AttachVideo(NativeHandle, m_TextureId, QualitySettings.activeColorSpace == ColorSpace.Linear);
             AddEventListener("resize", ResizeEvent);
         }
 

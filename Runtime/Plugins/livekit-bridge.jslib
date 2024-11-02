@@ -304,7 +304,7 @@ var NativeLib = {
         GLctx.deleteTexture(GL.textures[id]);
     },
 
-    AttachVideo: function (videoPtr, texId) {
+    AttachVideo: function (videoPtr, texId, adjustToLinearspace) {
         var tex = GL.textures[texId];
         var lastTime = -1;
 
@@ -320,6 +320,7 @@ var NativeLib = {
         });
  
         document.body.appendChild(initialVideo);
+        var internalFormat = adjustToLinearspace ? GLctx.SRGB8_ALPHA8 : GLctx.RGBA
         var updateVideo = function () {
             var video = LKBridge.Data.get(videoPtr);
             if (video === undefined) {
@@ -334,7 +335,7 @@ var NativeLib = {
                 
                 // Flip Y
                 GLctx.pixelStorei(GLctx.UNPACK_FLIP_Y_WEBGL, true);
-                GLctx.texImage2D(GLctx.TEXTURE_2D, 0, GLctx.RGBA, GLctx.RGBA, GLctx.UNSIGNED_BYTE, video);
+                GLctx.texImage2D(GLctx.TEXTURE_2D, 0, internalFormat, GLctx.RGBA, GLctx.UNSIGNED_BYTE, video);
                 GLctx.pixelStorei(GLctx.UNPACK_FLIP_Y_WEBGL, false);
 
                 GLctx.texParameteri(GLctx.TEXTURE_2D, GLctx.TEXTURE_MAG_FILTER, GLctx.LINEAR);
